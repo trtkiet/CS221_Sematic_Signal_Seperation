@@ -16,7 +16,7 @@ for file in files:
         print(f"Warning: {full_path} not found. Skipping.")
         continue
         
-    with open(file, 'r') as f:
+    with open(full_path, 'r') as f:
         for line in f:
             try:
                 item = json.loads(line)
@@ -25,7 +25,7 @@ for file in files:
                     for k, v in item['results'].items():
                         item[k] = v
                     del item['results']
-                item['source_file'] = file
+                item['source_file'] = full_path
                 data.append(item)
             except json.JSONDecodeError:
                 continue
